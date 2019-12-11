@@ -62,35 +62,31 @@ const loginUser = (req , res)=> {
 
 }
 const updateUser = (req, res)=> {
-    const id =parseInt(req.params.id)
-    console.log(id);
+    const id =req.params.id
+    // console.log(id);
     const {email, name, age}= req.body
-    console.log(name);
-    // pool.query('Update register Set name = $1, email =$2, age = $3 where id =$4', [name, email, age ,id] ).then(
-    //     res.json({
-    //         status: 200,
-    //         message:"updted successfully"
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-        
-
-    // )
+    
+    pool.query('Update register Set name = $1, age =$2  where id =$3' , [name, age,id] ).then(data=> {
+        console.log(data)
+        res.json({
+            status:200,
+            message:"User Create Successfully"
+        })
+    }).catch(err=> {
+        console.log(err)
+    })
 }
 const deleteUser = (req, res)=> {
-    const id =parseInt(req.params.id)
-    pool.query('Delete from register where id = $1', [id]).then(
+    const id =req.params.id
+    pool.query('Delete from register where id = $1', [id]).then(data=> {
         res.json({
-            status: 200,
-            message: "user deleted successgully"
-        }).catch(err => {
-            res.json(
-                {
-                    message: "somenthing went wrong"
-                }
-            )
+            status:200,
+            message:"User Create Successfully"
         })
-    )
+    }).catch(err=> {
+        console.log(err)
+    })
+    
 
 }
 module.exports = {
@@ -99,6 +95,6 @@ module.exports = {
     loginUser,
     updateUser,
     deleteUser,
-    getUsersBeforeUpdate
+    updateUser
 
 }

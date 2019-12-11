@@ -13,7 +13,7 @@ app.use(bodyparser.urlencoded({
 app.get('/users', db.getUsers)
 app.post("/register", db.registerUser)
 app.post('/login',db.loginUser);
-app.post('/updateUser', db.updateUser)
+app.put('/updateUser/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 app.listen(5000, ()=> {
     console.log("server Started")
